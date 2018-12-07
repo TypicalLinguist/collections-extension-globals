@@ -7,7 +7,11 @@ interface Array<T> {
 
     lastIndex(): number;
 
-    // [Symbol.iterator](): Iterator<T>;
+    [Symbol.iterator](): Iterator<T>;
+
+    mapAsync<R>(mapFunc: (item: T) => Promise<R>): Promise<Array<R>>;
+
+    forEachAsync(doFunc: (item: T) => Promise<void>): Promise<void>;
 }
 
 declare type FlattenOptions = FlattenDepthOptions | FlattenDeepOptions;
@@ -31,4 +35,6 @@ interface Map<K, V> {
     filter(predicate: (value?: V, key?: K, map?: Map<K, V>) => boolean): Map<K, V>;
 
     concat(map: Map<K, V>): Map<K, V>;
+
+    getReverse(searchValue: V): K | undefined;
 }
